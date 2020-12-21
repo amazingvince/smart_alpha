@@ -1,11 +1,22 @@
+# Config file for automatic testing at travis-ci.com
+
 language: python
 python:
-- 3.8
-- 3.7
-- 3.6
-- 3.5
+  - 3.8
+  - 3.7
+  - 3.6
+  - 3.5
+
+# Command to install dependencies
 install: pip install -U tox-travis
+
+# Command to run tests
 script: tox
+
+# Assuming you have installed the travis-ci CLI tool, after you
+# create the Github repo and add it to Travis, run the
+# following command to finish PyPI deployment setup:
+# $ travis encrypt --add deploy.password
 deploy:
   provider: script
   script: poetry publish
@@ -13,7 +24,7 @@ deploy:
   distributions: sdist bdist_wheel
   user: amazingvince
   password:
-    secure: T7f1MKe/MwiogUOYUZ3GYhGB7MHcBYnwwHIx3hXR6prEoKmK8TNuD2O618s22WwGU1XHQnmF7tt3pgAtTJ9ESxkjXiMskcaoTzGbc4mmvvxAHyeWG+O1Kf9tCvN6safKxZoDbfMot6AAQgVlKiT4iU/deuDSwlp344wI1yZF2bF2p4QjuoDGJ+Hk+7VLQKtulzxcPcoyZ42Nc/9ijopBhAic+/CZ/BumEgW5qMCybZBILbVpdXmYcfjkqH69mjSMGVEqIi8UdDL5FfmkJTRa7Gtf9HG0RjUIh0XiCsqr2SzbAkhM+5l+hHMmKyxKBU9mn83HjeIIWeNF5mvzSeX7zNfEfcjTpXFHNk9hTYz+IUizfQr534BuvKhN/2CoARh7nwHZ5znqp6uGbJUeonBJBtcQ0HBP6PP87R7PESoytnMYFpRKSjwwY8rdcVDjiQgg44R87GujFkRfJT/vQjhvv54WIv+psvB7sGsAPfnkJfDg5NIV7cwtzgH+aNcRhft4Svwe3TrD5L39iYnOUF/bHaPMBRNBIv9SNcLxHgXkL+zKbZgIKxFLnqA1S+I+SxyIMcbe4L0W3aAsj0pSLYhKriUCo5jzEchX/4ZeJHyOMdO1c+v5e0Y6DE0nNQv4lDm6Y8dvZ1pZdJ6Y4pEqW588amIvz531eHQ55UDI/D4HTrE=
+    secure: PLEASE_REPLACE_ME
   on:
     tags: true
     repo: amazingvince/smart_alpha
