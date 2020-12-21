@@ -1,4 +1,5 @@
 language: python
+
 python:
 - 3.8
 - 3.7
@@ -7,14 +8,18 @@ python:
 before_install: pip install poetry
 install: pip install -U tox-travis
 script: tox
+
+before_deploy:
+    # User and password environment variables are set as hidden variables through
+    # the web interface in the project settings.
+    - pip install --upgrade pip
+    - pip install poetry
+    - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
+
 deploy:
   provider: script
   script: poetry publish --build
   skip_cleanup: true
-  distributions: sdist bdist_wheel
-  user: amazingvince
-  password:
-    secure: vOipB5Vz/HsI2tnzHYqLGBAXYosIq8YWePX/ahUCwxB4AJo9KDySEgGhMa+WkKaX2DJlr2wW0Q4TmwIEUe9AMj/ktyjfLMhNjCPmKn+I6WXBEujq4DagAQNnLB5thzgnPuq7/oI8DJewMH+rjwFlStbzhM6/pWRwvFmHqutsEnn7uPdC5NxlBaQkvB0E8hHfO5y/3bK2mHa23uhJcRqTItfU3aRo4TNd5lRtNcDeUIWzjdEOAXAmzKY+iYOjBg1da8tvQHLsPDA7P0jm6EolUn/VjUnSCK2Rp6iF1qWf3UTifQsOoygUP6Up7weyxC3Df55VXR4IYsxWgYV5thm8If75oix31Ka7bjAfQA9aiFiyoT9xpCBzDDjqUmb59gcA+16t7Roo4Sz7fogzBSCmE/xbI+pfUZrTaYxJDsCuCfBLJ2Mcak1wHyewp9dUNyc6M1go9tQCTrktYZXGwKhYi1+cjmISVJwjVujVCoxQdONifH1q/4yfYTBbymWUrktNPgaQPNcrbmWjRqPkU9/JJ2YDr+XvBx7+a1qYNBiReyRp6et/P7zjEvezNLDmnyCmFKdJ8RdoJiNkndIr1hEwxIv/O4pwLGnSXaFqSX7hbYMrwotMF2Tzc6nMdGYhrOiL4zvzASoOLS76qgO0Y1510I8+cKCY2sw0h8K8s/FUaB4=
   on:
     tags: true
     repo: amazingvince/smart_alpha
